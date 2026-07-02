@@ -10,15 +10,15 @@ def get_files_info(working_directory: str, directory: str = ".") -> str:
         if not is_valid_target_directory:
             info.append(f'  Error: Cannot list "{directory}" as it is outside the permitted working directory')
             return "\n".join(info)
+    
+        if not os.path.isdir(target_directory):
+            info.append(f'Error: "{directory}" is not a directory')
+            return "\n".join(info)
+        
+        for dir_name in os.listdir(target_directory):
+            abs_dir_name = os.path.join(target_directory, dir_name)
+            info.append(f"  - {dir_name}: file_size={os.path.getsize(abs_dir_name)} bytes, is_dir={os.path.isdir(abs_dir_name)}")
+        return "\n".join(info)
     except Exception as e:
         info.append(f'  Error: "{e}"')
         return "\n".join(info)
-    
-    if not os.path.isdir(target_directory):
-        info.append(f'Error: "{directory}" is not a directory')
-        return "\n".join(info)
-    
-    for dir_name in os.listdir(target_directory):
-        abs_dir_name = os.path.join(target_directory, dir_name)
-        info.append(f"  - {dir_name}: file_size={os.path.getsize(abs_dir_name)} bytes, is_dir={os.path.isdir(abs_dir_name)}")
-    return "\n".join(info)
