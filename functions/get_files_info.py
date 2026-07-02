@@ -1,7 +1,7 @@
 import os 
 
 def get_files_info(working_directory: str, directory: str = ".") -> str:
-    info = [f"Result for {'current' if directory == '.' else f"'{directory}'"} directory:"]
+    info = [f"Result for looking up {'current' if directory == '.' else f"'{directory}'"} directory:"]
 
     try:
         full_working_directory_path = os.path.abspath(working_directory)

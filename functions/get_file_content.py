@@ -1,7 +1,7 @@
 import os
 
 def get_file_content(working_directory: str, file_path: str) -> str:
-    info = [f"Result for '{file_path}' file:"]
+    info = [f"Result for reading '{file_path}' file:"]
 
     try:
         full_working_directory_path = os.path.abspath(working_directory)
