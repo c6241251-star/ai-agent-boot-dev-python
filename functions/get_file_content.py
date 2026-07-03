@@ -7,6 +7,7 @@ def get_file_content(working_directory: str, file_path: str) -> str:
         full_working_directory_path = os.path.abspath(working_directory)
         target_directory            = os.path.normpath(os.path.join(full_working_directory_path, file_path))
         is_valid_target_directory   = os.path.commonpath([full_working_directory_path, target_directory]) == full_working_directory_path
+
         if not is_valid_target_directory:
             info.append(f'  Error: Cannot read "{file_path}" as it is outside the permitted working directory')
             return "\n".join(info)
@@ -23,6 +24,8 @@ def get_file_content(working_directory: str, file_path: str) -> str:
 
         info.append(file_content_string)
         return "\n".join(info)
+    
     except Exception as e:
         info.append(f'  Error: "{e}"')
         return "\n".join(info)
+    
