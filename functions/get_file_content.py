@@ -1,5 +1,7 @@
 import os
 
+from config import MAX_CHARS
+
 def get_file_content(working_directory: str, file_path: str) -> str:
     info = [f"Result for reading '{file_path}' file:"]
 
@@ -16,7 +18,6 @@ def get_file_content(working_directory: str, file_path: str) -> str:
             info.append(f'  Error: File not found or is not a regular file: "{file_path}"')
             return "\n".join(info)
         
-        MAX_CHARS = 10000
         with open(target_directory, "r") as f:
             file_content_string = f.read(MAX_CHARS)
             if f.read(1):
@@ -28,4 +29,25 @@ def get_file_content(working_directory: str, file_path: str) -> str:
     except Exception as e:
         info.append(f'  Error: "{e}"')
         return "\n".join(info)
+    
+
+schema_get_file_content = {
+    "type": "function",
+    "function": {
+        "name": "get_file_content",
+        "description": f"Retrieves the content (at most {MAX_CHARS} characters) of a specified file within the working directory",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "Path to the file to read, relative to the working directory",
+                },
+            },
+            "required": ["file_path"],
+        },
+    },
+}
+
+
     
